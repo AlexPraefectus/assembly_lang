@@ -20,9 +20,9 @@ bufferToHex:
     mov rcx, [rsp+16]       ; rcx stores length of number in bits
     mov rdi, [rsp+8]        ; rdi stores pointer to current buffer position 
     shr rcx, 3              ; get amount of bytes in number
-    inc rcx
+    ;inc rcx
     parse:
-        mov r8b, [rsi]      ; get 1 byte from number
+        mov r8b, [rsi + rcx -1]      ; get 1 byte from number
 
         mov al, r8b         ;  
         and al, 0F0h         ; get first 4 bits

@@ -1,25 +1,8 @@
 SECTION .TEXT
     %include "src/module.asm"
     GLOBAL _start
-    GLOBAL printCPUIDproc
 
-printCPUIDproc:
-        mov r8d,'    '
-        mov [message], r8d
-        mov [message+4], r8d
-        mov [message+8], r8d
-        mov [message+12], r8d
-        CPUID
-        mov [message], eax
-        mov [message+4], ebx
-        mov [message+8], edx
-        mov [message+12], ecx
-        mov eax, 4
-        mov ebx, 1
-        mov ecx, message
-        mov edx, 18
-        int 80h
-        ret
+
 
 _start:
         mov eax,4            ; 'write' system call = 4
@@ -62,18 +45,7 @@ _start:
         int 80h
 
 
-        mov r9b, [number2]
-        and r9b, 080h
-        jnz printMinus2
-        mov al, `+`
-        jmp continue2
-    printMinus2:
-        mov al, '-'        
-    continue2:
-        mov [message], al
-        mov r9b, [number2]
-        and r9b, 07Fh
-        mov [number2], r9b
+
 	push number2
         push 8
         push message + 1
@@ -90,7 +62,7 @@ _start:
 
 
 
-        mov r9b, [number3]
+        mov r9b, [number3 + 1]
         and r9b, 080h
         jnz printMinus3
         mov al, `+`
@@ -99,11 +71,11 @@ _start:
         mov al, '-'        
     continue3:
         mov [message], al
-        mov r9b, [number3]
+        mov r9b, [number3 + 1]
         and r9b, 07Fh
-        mov [number3], r9b
+        mov [number3 + 1], r9b
 	push number3
-        push 8
+        push 16
         push message + 1
         call bufferToHex
 
@@ -114,6 +86,143 @@ _start:
         mov ebx, 1
         mov ecx, message
         mov edx, 6
+        int 80h
+
+
+        mov r9b, [number4 + 1]
+        and r9b, 080h
+        jnz printMinus4
+        mov al, `+`
+        jmp continue4
+    printMinus4:
+        mov al, '-'        
+    continue4:
+        mov [message], al
+        mov r9b, [number4 + 1]
+        and r9b, 07Fh
+        mov [number4 + 1], r9b
+	push number4
+        push 16
+        push message + 1
+        call bufferToHex
+
+        mov al, `\n`
+        mov [message+5], al
+
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, message
+        mov edx, 6
+        int 80h
+
+
+
+        mov r9b, [number5 + 3]
+        and r9b, 080h
+        jnz printMinus5
+        mov al, `+`
+        jmp continue5
+    printMinus5:
+        mov al, '-'        
+    continue5:
+        mov [message], al
+        mov r9b, [number5 + 3]
+        and r9b, 07Fh
+        mov [number5 + 3], r9b
+	push number5
+        push 32
+        push message + 1
+        call bufferToHex
+
+        mov al, `\n`
+        mov [message+9], al
+
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, message
+        mov edx, 10
+        int 80h
+
+
+
+        mov r9b, [number6 + 3]
+        and r9b, 080h
+        jnz printMinus6
+        mov al, `+`
+        jmp continue6
+    printMinus6:
+        mov al, '-'        
+    continue6:
+        mov [message], al
+        mov r9b, [number6 + 3]
+        and r9b, 07Fh
+        mov [number6 + 3], r9b
+	push number6
+        push 32
+        push message + 1
+        call bufferToHex
+
+        mov al, `\n`
+        mov [message+9], al
+
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, message
+        mov edx, 10
+        int 80h
+
+
+        mov r9b, [number7 + 7]
+        and r9b, 080h
+        jnz printMinus7
+        mov al, `+`
+        jmp continue7
+    printMinus7:
+        mov al, '-'        
+    continue7:
+        mov [message], al
+        mov r9b, [number7 + 7]
+        and r9b, 07Fh
+        mov [number7 + 7], r9b
+	push number7
+        push 64
+        push message + 1
+        call bufferToHex
+
+        mov al, `\n`
+        mov [message+17], al
+
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, message
+        mov edx, 18
+        int 80h
+
+
+        mov r9b, [number8 + 7]
+        and r9b, 080h
+        jnz printMinus8
+        mov al, `+`
+        jmp continue8
+    printMinus8:
+        mov al, '-'        
+    continue8:
+        mov [message], al
+        mov r9b, [number8 + 7]
+        and r9b, 07Fh
+        mov [number8 + 7], r9b
+	push number8
+        push 64
+        push message + 1
+        call bufferToHex
+
+        mov al, `\n`
+        mov [message+17], al
+
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, message
+        mov edx, 18
         int 80h
 	
 
@@ -132,6 +241,10 @@ SECTION .DATA, write
     number2: db -20
     number3: dw 20
     number4: dw -20
+    number5: dd 20
+    number6: dd -20
+    number7: dd 20, 0
+    number8: dd 0FFFFFFECh, 0FFFFFFFFh 
     message: dd 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     messageTail: db `\n`
 
