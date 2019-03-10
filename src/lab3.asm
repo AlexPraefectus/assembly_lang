@@ -18,7 +18,7 @@ _start:
         mov ecx, lab         ; Current lab number
         mov edx, labLen      ; string length
         int 80h
-        
+      
 
 	push number1
         push 8
@@ -186,7 +186,7 @@ _start:
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 43
+        mov edx, 42
         int 80h
 	
 
@@ -205,7 +205,7 @@ _start:
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 43
+        mov edx, 42
         int 80h
 
 
@@ -224,7 +224,7 @@ _start:
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 43
+        mov edx, 42
         int 80h
 
 
@@ -290,13 +290,13 @@ _start:
         push message + 1
         call bufferToHex
         mov al, `\t`
-        mov [message+17], al
+        mov [message+21], al
         push number15
         push 10
         push message + 22
         call bufferToBin
 	mov al, `\n`
-	mov [message+100], al
+	mov [message+102], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
@@ -308,12 +308,18 @@ _start:
         push 80
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+21], al
+        push number16
+        push 10
+        push message + 22
+        call bufferToBin
+	mov al, `\n`
+	mov [message+102], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 22
+        mov edx, 103
         int 80h
 
 
@@ -321,12 +327,18 @@ _start:
         push 80
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+21], al
+        push number17
+        push 10
+        push message + 22
+        call bufferToBin
+	mov al, `\n`
+	mov [message+102], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 22
+        mov edx, 103
         int 80h
 
 
@@ -363,8 +375,5 @@ SECTION .DATA, write
     number16: dt -20.0
     number17: dt 20.20
     
-    message: dd 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    message: dq 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     messageTail: db `\n`
-
-SECTION .BSS, write
-    messageBinary: resb 80
