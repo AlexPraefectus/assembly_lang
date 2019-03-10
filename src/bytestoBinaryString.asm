@@ -30,28 +30,32 @@ section .TEXT
         mov rdi, [rsp+8]        ; rdi stores pointer to current buffer position 
         parse2:
             mov r8b, [rsi + rcx -1]      ; get 1 byte from number
-    
-            mov al, r8b         ;  
+        	mov al, r8b         ;  
             and al, 0F0h         ; get first 4 bits
             shr al, 4           ; 
-            call getBinaryRepr  ;
-            mov [rdi], rax
+            call getBinaryRepr       ;
+            mov [rdi], r11d
             add rdi, 4
         
             mov al, r8b
             and al, 0fh;
             call getBinaryRepr
-            mov [rdi], rax
-            add rdi, 4
+            mov [rdi], r11d 
+            add rdi, 4 
         loop parse2
         ret
     
     ;4 low bits should be stored in al
     getBinaryRepr:
-        mov dl, al     ; store 4 low bits
+        push rdx
+        push rax
+        mov rdx, rax     ; store 4 low bits
         mov r10, chr_0 ; store reference to table start
-        shl dl, 2      ; each table element has 4 bytes
-        mov rax, [rdx + r10]    ; result to rax
+        shl rdx, 2      ; each table element has 4 bytes
+        mov r11d, [rdx + r10]    ; result to rax
+        pop rax
+        pop rdx
+	ret
         
     
 

@@ -28,12 +28,14 @@ _start:
         mov [message+3], al
         push number1
         push 1
-        push message + 5
+        push message + 4
         call bufferToBin
+	mov al, `\n`
+	mov [message+12], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 4
+        mov edx, 13
         int 80h
 
 
@@ -42,12 +44,18 @@ _start:
         push 8
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+3], al
+        push number2
+        push 1
+        push message + 4
+        call bufferToBin
+	mov al, `\n`
+	mov [message+12], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 4
+        mov edx, 13
         int 80h
 
 
@@ -55,24 +63,37 @@ _start:
         push 16
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+5], al
+        push number3
+        push 2
+        push message + 6
+        call bufferToBin
+	mov al, `\n`
+	mov [message+22], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 6
+        mov edx, 23
         int 80h
+
 
 	push number4
         push 16
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+5], al
+        push number4
+        push 2
+        push message + 6
+        call bufferToBin
+	mov al, `\n`
+	mov [message+22], al
         mov eax, 4
         mov ebx, 1
-        mov ecx, message
-        mov edx, 6
+        mov ecx, message + 1
+        mov edx, 23
         int 80h
 
 
@@ -80,48 +101,73 @@ _start:
         push 32
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+9], al
+        push number5
+        push 4
+        push message + 10
+        call bufferToBin
+	mov al, `\n`
+	mov [message+42], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 10
+        mov edx, 43
         int 80h
 
 	push number6
         push 32
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+9], al
+        push number6
+        push 4
+        push message + 10
+        call bufferToBin
+	mov al, `\n`
+	mov [message+42], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 10
+        mov edx, 43
         int 80h
 
 	push number7
         push 64
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+17], al
+        push number7
+        push 8
+        push message + 18
+        call bufferToBin
+	mov al, `\n`
+	mov [message+82], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 18
+        mov edx, 83
         int 80h
+
 
 	push number8
         push 64
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+17], al
+        push number8
+        push 8
+        push message + 18
+        call bufferToBin
+	mov al, `\n`
+	mov [message+82], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 18
+        mov edx, 83
         int 80h
 
 
@@ -129,12 +175,18 @@ _start:
         push 32
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+9], al
+        push number9
+        push 4
+        push message + 10
+        call bufferToBin
+	mov al, `\n`
+	mov [message+42], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 9
+        mov edx, 43
         int 80h
 	
 
@@ -142,12 +194,18 @@ _start:
         push 32
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+9], al
+        push number10
+        push 4
+        push message + 10
+        call bufferToBin
+	mov al, `\n`
+	mov [message+42], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 9
+        mov edx, 43
         int 80h
 
 
@@ -155,12 +213,18 @@ _start:
         push 32
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+9], al
+        push number11
+        push 4
+        push message + 10
+        call bufferToBin
+	mov al, `\n`
+	mov [message+42], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 9
+        mov edx, 43
         int 80h
 
 
@@ -168,48 +232,75 @@ _start:
         push 64
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+17], al
+        push number12
+        push 8
+        push message + 18
+        call bufferToBin
+	mov al, `\n`
+	mov [message+82], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 18
+        mov edx, 83
         int 80h
+
 
 	push number13
         push 64
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+17], al
+        push number13
+        push 8
+        push message + 18
+        call bufferToBin
+	mov al, `\n`
+	mov [message+82], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 18
+        mov edx, 83
         int 80h
+
 
 	push number14
         push 64
         push message + 1
         call bufferToHex
-        mov al, `\n`
+        mov al, `\t`
         mov [message+17], al
+        push number14
+        push 8
+        push message + 18
+        call bufferToBin
+	mov al, `\n`
+	mov [message+82], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 18
+        mov edx, 83
         int 80h
+
 
 	push number15
         push 80
         push message + 1
         call bufferToHex
-        mov al, `\n`
-        mov [message+21], al
+        mov al, `\t`
+        mov [message+17], al
+        push number15
+        push 10
+        push message + 22
+        call bufferToBin
+	mov al, `\n`
+	mov [message+100], al
         mov eax, 4
         mov ebx, 1
         mov ecx, message + 1
-        mov edx, 22
+        mov edx, 103
         int 80h
 
 
