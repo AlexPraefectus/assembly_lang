@@ -6,7 +6,7 @@ SECTION .TEXT
 
 
 _start:
-        mov eax,4            ; 'write' system call = 4
+  mov eax,4            ; 'write' system call = 4
 	mov ebx,1            ; file descriptor 1 = STDOUT
 	mov ecx,hello        ; string to write
 	mov edx,helloLen     ; length of string to write
@@ -18,7 +18,7 @@ _start:
         mov ecx, lab         ; Current lab number
         mov edx, labLen      ; string length
         int 80h
-      
+
 
 	push number1
         push 8
@@ -188,7 +188,7 @@ _start:
         mov ecx, message + 1
         mov edx, 42
         int 80h
-	
+
 
 	push number10
         push 32
@@ -374,6 +374,6 @@ SECTION .DATA, write
     number15: dt 20.0
     number16: dt -20.0
     number17: dt 20.20
-    
+
     message: dq 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     messageTail: db `\n`
