@@ -27,24 +27,24 @@ section .TEXT
     bufferToBin:
         mov rsi, [rsp+24]       ; rsi stores number addr
         mov rcx, [rsp+16]       ; rcx stores length of number in bytes
-        mov rdi, [rsp+8]        ; rdi stores pointer to current buffer position 
+        mov rdi, [rsp+8]        ; rdi stores pointer to current buffer position
         parse2:
             mov r8b, [rsi + rcx -1]      ; get 1 byte from number
-        	mov al, r8b         ;  
+        	  mov al, r8b         ;
             and al, 0F0h         ; get first 4 bits
-            shr al, 4           ; 
+            shr al, 4           ;
             call getBinaryRepr       ;
             mov [rdi], r11d
             add rdi, 4
-        
+
             mov al, r8b
             and al, 0fh;
             call getBinaryRepr
-            mov [rdi], r11d 
-            add rdi, 4 
+            mov [rdi], r11d
+            add rdi, 4
         loop parse2
         ret
-    
+
     ;4 low bits should be stored in al
     getBinaryRepr:
         push rdx
@@ -56,6 +56,3 @@ section .TEXT
         pop rax
         pop rdx
 	ret
-        
-    
-
